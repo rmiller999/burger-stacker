@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#burger {
+  float: right;
+  padding-right: 550px;
+}
+#ingredients {
+  float: left;
+  padding-left: 80px;
+}

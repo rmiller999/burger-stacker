@@ -1,5 +1,6 @@
 import React from 'react';
-
+import IngredientList from './IngredientList';
+import Burger from './Burger';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,18 +20,43 @@ class App extends React.Component {
       {name: 'Bacon', color: 'maroon'},
       {name: 'Onion', color: 'lightyellow'}
     ],
+    stack: []
+  }
+  this.clearStack = this.clearStack.bind(this)
+  this.addIngredient = this.addIngredient.bind(this)
+  }
+  
+  addIngredient(e, i) {
+    e.preventDefault();
+    const stackCopy = Array.from(this.state.stack); 
+    stackCopy.unshift(this.state.ingredients[i]);
+    this.setState({
+      stack: stackCopy
+    })
+  }
+  
+  clearStack(e) {
+    e.preventDefault();
+    this.setState({
       stack: []
-    }
+    })
   }
+  
   render() {
-    return (
-      <>
-
-      </>
-    );
-
+    const listCopy = Array.from(this.state.ingredients)
+    const stackCopy = Array.from(this.state.stack);
+    return(
+      <main>
+        <div id='ingredients'>
+          <IngredientList ingredients={listCopy} addIngredient={this.addIngredient} />
+        </div>
+        
+        <div id='burgerlist'>
+          <Burger usedIngredients={stackCopy} clearStack={this.clearStack}/>
+        </div>
+      </main>  
+    )
   }
-
 }
 
 export default App;
